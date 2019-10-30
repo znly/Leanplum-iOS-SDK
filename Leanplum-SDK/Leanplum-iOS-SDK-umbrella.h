@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "LeanplumSDK_iOS.h"
 #import "LPActionContext-Internal.h"
 #import "LPActionManager.h"
 #import "LPUIAlert.h"
@@ -67,7 +68,3 @@
 #import "UIDevice+IdentifierAddition.h"
 #import "Leanplum_AsyncSocket.h"
 #import "Leanplum_WebSocket.h"
-
-FOUNDATION_EXPORT double LeanplumVersionNumber;
-FOUNDATION_EXPORT const unsigned char LeanplumVersionString[];
-
