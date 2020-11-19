@@ -1995,7 +1995,7 @@ void leanplumExceptionHandler(NSException *exception);
         arguments[LP_PARAM_INFO] = info;
     }
     if (params) {
-        params = [Leanplum validateAttributes:params named:@"params" allowLists:NO];
+        params = [Leanplum validateAttributes:params named:@"params" allowLists:YES];
         arguments[LP_PARAM_PARAMS] = [LPJSON stringFromJSON:params];
     }
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
@@ -2259,7 +2259,7 @@ andParameters:(NSDictionary *)params
     }
     RETURN_IF_NOOP;
     LP_TRY
-    info = [self validateAttributes:info named:@"info" allowLists:NO];
+    info = [self validateAttributes:info named:@"info" allowLists:YES];
     [self onStartIssued:^{
         [self setTrafficSourceInfoInternal:info];
     }];
@@ -2308,7 +2308,7 @@ andParameters:(NSDictionary *)params
         args[LP_PARAM_INFO] = info;
     }
     if (params) {
-        params = [Leanplum validateAttributes:params named:@"params" allowLists:NO];
+        params = [Leanplum validateAttributes:params named:@"params" allowLists:YES];
         args[LP_PARAM_PARAMS] = [LPJSON stringFromJSON:params];
     }
 

@@ -62,6 +62,8 @@
 		546A1B0F0C279A54FD9AA593 /* LPMessageArchiveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3AD74B6AC45FA222E191D3 /* LPMessageArchiveData.m */; };
 		57388626C13B4E669D95300A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 477BD3AF9080B9C26A3F40F8 /* Images.xcassets */; };
 		590335DD61D5453A9AF08488 /* LPInterstitialMessageTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2C8D5887B09DEB3A6CC082 /* LPInterstitialMessageTemplate.m */; };
+		5B2A2FC82566D3E5007D7E37 /* LPDeferMessageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B2A2FC62566D3E5007D7E37 /* LPDeferMessageManager.h */; };
+		5B2A2FC92566D3E5007D7E37 /* LPDeferMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2A2FC72566D3E5007D7E37 /* LPDeferMessageManager.m */; };
 		5E2273EFA0ED797396DEDDC1 /* LeanplumCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 712E58295E78ED6821ADFCAB /* LeanplumCompatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		619B024D57210214484C6784 /* LPRichInterstitialMessageTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = CEDE98C78A3C86CDC560C4D6 /* LPRichInterstitialMessageTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61F094D2E0A16F52CAA35D46 /* LPRevenueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B412A6D6B9AADC8FAC36AB /* LPRevenueManager.m */; };
@@ -238,6 +240,8 @@
 		54E47B2E88A523EF70FFC3BD /* LeanplumInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeanplumInternal.h; sourceTree = "<group>"; };
 		55CF9A7A320F79514BB7EDFB /* LPRegisterForPushMessageTemplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPRegisterForPushMessageTemplate.h; sourceTree = "<group>"; };
 		57C622ABB62C4E2DE7FA0E41 /* LeanplumSDK_iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "LeanplumSDK_iOS-Info.plist"; sourceTree = "<group>"; };
+		5B2A2FC62566D3E5007D7E37 /* LPDeferMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDeferMessageManager.h; sourceTree = "<group>"; };
+		5B2A2FC72566D3E5007D7E37 /* LPDeferMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDeferMessageManager.m; sourceTree = "<group>"; };
 		5C65EB9556E41FC23647AFFC /* LPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPRequest.h; sourceTree = "<group>"; };
 		5D43485A383AF83A41092398 /* Leanplum_Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Leanplum_Reachability.h; sourceTree = "<group>"; };
 		5D468287B8693E998A4DA61F /* LPNetworkFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LPNetworkFactory.m; sourceTree = "<group>"; };
@@ -643,6 +647,8 @@
 				E846E120F6FAF683C59E485D /* LPAppIconManager.m */,
 				38C13D507380765C504B16D0 /* LPCountAggregator.h */,
 				1D3AEC4E13D4A8B8E727A0A0 /* LPCountAggregator.m */,
+				5B2A2FC62566D3E5007D7E37 /* LPDeferMessageManager.h */,
+				5B2A2FC72566D3E5007D7E37 /* LPDeferMessageManager.m */,
 				666897C55C116E45E90D0C1D /* LPFileManager.h */,
 				0D7B5C11EE9D57EF8469D0C2 /* LPFileManager.m */,
 				9EEE92B324D95765003F0720 /* LPLogManager.h */,
@@ -859,6 +865,7 @@
 				8B473962853F7E1D5F3DDC78 /* LPResponse.h in Headers */,
 				29E2700BAFB249E6CDBA28E4 /* LPRevenueManager.h in Headers */,
 				619B024D57210214484C6784 /* LPRichInterstitialMessageTemplate.h in Headers */,
+				5B2A2FC82566D3E5007D7E37 /* LPDeferMessageManager.h in Headers */,
 				1234E2B6A68005D7BEA1F982 /* LPSwizzle.h in Headers */,
 				89FCD2B0FD3E7E658AF06414 /* LPUIAlert.h in Headers */,
 				1A5BC47A4242A8A3C50EDC47 /* LPUtils.h in Headers */,
@@ -1007,6 +1014,7 @@
 				405BA9EC69827B5116400D2A /* LPExceptionHandler.m in Sources */,
 				6DBF2FF5BE9B9BB17FF4804E /* LPFeatureFlagManager.m in Sources */,
 				01C405B6B53862C4240956B0 /* LPFileManager.m in Sources */,
+				5B2A2FC92566D3E5007D7E37 /* LPDeferMessageManager.m in Sources */,
 				07EDB9AA720FBB439DCE5342 /* LPFileTransferManager.m in Sources */,
 				92CC3418FF6121DDF773F929 /* LPHitView.m in Sources */,
 				6ED65B32FEA16E1ACA61E23D /* LPIconChangeMessageTemplate.m in Sources */,

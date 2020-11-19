@@ -70,6 +70,9 @@
 // Prevent circular reference
 @class LPDeferrableAction;
 
+//Custom Zenly
+#import "LPAPIConfig.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 #define _LP_DEFINE_HELPER(name,val,type) LPVar* name; \
