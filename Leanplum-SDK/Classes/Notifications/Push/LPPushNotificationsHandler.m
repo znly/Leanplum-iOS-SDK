@@ -187,7 +187,7 @@
         if (existingToken) {
             params[LP_PARAM_DEVICE_PUSH_TOKEN] = existingToken;
         }
-        [Leanplum onStartResponse:^(BOOL success) {
+        [Leanplum onStartResponse:^(BOOL success, NSError *error) {
             LP_END_USER_CODE
             LPRequest *request = [LPRequestFactory setDeviceAttributesWithParams:params];
             [[LPRequestSender sharedInstance] send:request];

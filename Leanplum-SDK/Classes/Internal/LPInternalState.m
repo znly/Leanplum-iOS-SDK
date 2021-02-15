@@ -41,6 +41,7 @@
         _stripViewControllerFromState = NO;
         _isScreenTrackingEnabled = NO;
         _calledHandleNotification = NO;
+        _startError = nil;
     }
     return self;
 }

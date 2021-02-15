@@ -144,7 +144,7 @@ name = [LPVar define:[@#name stringByReplacingOccurrencesOfString:@"_" withStrin
  * Those blocks are used when you define callbacks.
  * @{
  */
-typedef void (^LeanplumStartBlock)(BOOL success);
+typedef void (^LeanplumStartBlock)(BOOL success, NSError * _Nullable error);
 typedef void (^LeanplumSetLocationBlock)(BOOL success);
 // Returns whether the action was handled.
 typedef BOOL (^LeanplumActionBlock)(LPActionContext* context);

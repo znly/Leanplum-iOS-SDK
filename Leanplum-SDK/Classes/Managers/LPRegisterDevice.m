@@ -48,10 +48,10 @@
     return self;
 }
 
-- (void)showError:(NSString *)message
+- (void)showError:(NSString *)message code:(NSInteger)code
 {
     LPLog(LPError, @"Device registration error: %@", message);
-    self.callback(NO);
+    self.callback(NO, [NSError errorWithDomain:@"com.leanplum" code:code userInfo:@{NSLocalizedDescriptionKey: message}]);
 }
 
 - (void)registerDevice:(NSString *)email
@@ -62,14 +62,15 @@
         LP_TRY
         BOOL isSuccess = [LPResponse isResponseSuccess:response];
         if (isSuccess) {
-            self.callback(YES);
+            self.callback(YES, nil);
         } else {
-            [self showError:[LPResponse getResponseError:response]];
+            [self showError:[LPResponse getResponseError:response]
+                       code:operation.HTTPStatusCode];
         }
         LP_END_TRY
     }];
     [request onError:^(NSError *error) {
-        [self showError:[error localizedDescription]];
+        [self showError:[error localizedDescription] code:error.code];
     }];
     [[LPRequestSender sharedInstance] send:request];
     

@@ -507,7 +507,7 @@ void leanplumExceptionHandler(NSException *exception);
     }
 }
 
-+ (void)triggerStartResponse:(BOOL)success
++ (void)triggerStartResponse:(BOOL)success error:(NSError *)error
 {
     LP_BEGIN_USER_CODE
 
@@ -524,7 +524,7 @@ void leanplumExceptionHandler(NSException *exception);
 
     @synchronized (startBlocks) {
         for (LeanplumStartBlock block in startBlocks) {
-            block(success);
+            block(success, error);
         }
         [startBlocks removeAllObjects];
     }
@@ -737,6 +737,7 @@ void leanplumExceptionHandler(NSException *exception);
     state.hasStarted = NO;
     state.hasStartedAndRegisteredAsDeveloper = NO;
     state.startSuccessful = NO;
+    state.startError = nil;
     [state.startBlocks removeAllObjects];
     [state.startResponders removeAllObjects];
     [state.actionBlocks removeAllObjects];
@@ -805,13 +806,14 @@ void leanplumExceptionHandler(NSException *exception);
     if (IS_NOOP) {
         state.hasStarted = YES;
         state.startSuccessful = YES;
+        state.startError = nil;
         [[LPVarCache sharedCache] applyVariableDiffs:@{}
                                             messages:@{}
                                             variants:@[]
                                              regions:@{}
                                     variantDebugInfo:@{}];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self triggerStartResponse:YES];
+            [self triggerStartResponse:YES error:nil];
             [self triggerVariablesChanged];
             [self triggerVariablesChangedAndNoDownloadsPending];
             [[self inbox] updateMessages:[[NSMutableDictionary alloc] init] unreadCount:0];
@@ -949,6 +951,7 @@ void leanplumExceptionHandler(NSException *exception);
         LP_TRY
         state.hasStarted = YES;
         state.startSuccessful = YES;
+        state.startError = nil;
         NSDictionary *values = response[LP_KEY_VARS];
         NSString *token = response[LP_KEY_TOKEN];
         NSDictionary *messages = response[LP_KEY_MESSAGES];
@@ -981,13 +984,13 @@ void leanplumExceptionHandler(NSException *exception);
 
         // TODO: Need to call this if we fix encryption.
         // [LPVarCache saveUserAttributes];
-        [self triggerStartResponse:YES];
+        [self triggerStartResponse:YES error:nil];
 
         // Allow bidirectional realtime variable updates.
         if ([LPConstantsState sharedState].isDevelopmentModeEnabled) {
             // Register device.
             if (registrationEmail && ![response[LP_KEY_IS_REGISTERED] boolValue]) {
-                state.registration = [[LPRegisterDevice alloc] initWithCallback:^(BOOL success) {
+                state.registration = [[LPRegisterDevice alloc] initWithCallback:^(BOOL success, NSError *error) {
                                     if (success) {
                                         [Leanplum onHasStartedAndRegisteredAsDeveloper];
                                     }}];
@@ -1048,12 +1051,12 @@ void leanplumExceptionHandler(NSException *exception);
         LP_TRY
         state.hasStarted = YES;
         state.startSuccessful = NO;
-
+        state.startError = err;
         // Load the variables that were stored on the device from the last session.
         [[LPVarCache sharedCache] loadDiffs];
         LP_END_TRY
 
-        [self triggerStartResponse:NO];
+        [self triggerStartResponse:NO error:err];
         
         [self maybePerformActions:@[@"start", @"resume"]
                     withEventName:nil
@@ -1305,7 +1308,8 @@ void leanplumExceptionHandler(NSException *exception);
     }
 
     if ([LPInternalState sharedState].hasStarted) {
-        block([LPInternalState sharedState].startSuccessful);
+        block([LPInternalState sharedState].startSuccessful,
+              [LPInternalState sharedState].startError);
     } else {
         LP_TRY
         if (![LPInternalState sharedState].startBlocks) {
@@ -2213,7 +2217,7 @@ andParameters:(NSDictionary *)params
         }
     }
 
-    [Leanplum onStartResponse:^(BOOL success) {
+    [Leanplum onStartResponse:^(BOOL success, NSError *error) {
         LP_END_USER_CODE
         [self recordAttributeChanges];
         LP_BEGIN_USER_CODE
